@@ -216,9 +216,9 @@ def run_updatecontract():
                       index=False)
             logger.success(
                 f"Data saved successfully to {TICKER_DIR}/Updater/OptionContracts_{edt_time.strftime('%Y%m%d')}_{edt_time.strftime('%H%M')}.csv")
+            return df, path
         else:
             logger.warning("No data was collected to save.")
-        return df, path
     else:
         time.sleep(60)
         counter += 1

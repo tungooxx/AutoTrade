@@ -31,13 +31,9 @@ document.getElementById('updater').onclick = async () => {
     console.log('[DEBUG] Run button clicked');
 
     console.log('[DEBUG] Calling runOptionChain API');
-    const res = await window.api.runUpdater();
-    console.log('[DEBUG] API response:', res);
-
-    statusEl.textContent = 'Done\n' + JSON.stringify(res, null, 2);
-    console.log('[DEBUG] Status element updated');
-    
-    const rows = await window.api.previewCSV();
+    const rows = await window.api.runUpdater();
+    statusEl.textContent = `Rows: ${rows.length}`;
+    console.log('[DEBUG] response rows:', rows?.length ?? 0);
     const cols = Object.keys(rows[0]);
     const thead = `<thead><tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr></thead>`;
     console.log(thead);

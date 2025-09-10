@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-const BASE = 'http://127.0.0.1:6789';
+const BASE = 'http://127.0.0.1:8000';
 
 async function jsonFetch(path, opts = {}) {
   const res = await fetch(`${BASE}${path}`, { ...opts });

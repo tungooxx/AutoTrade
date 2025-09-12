@@ -1,0 +1,140 @@
+:root {
+  --bg: #0f1115;
+  --panel: #161a22;
+  --panel-2: #1b2130;
+  --text: #e6e9ef;
+  --muted: #9aa4b2;
+  --primary: #5b8cff;
+  --success: #40c463;
+  --danger: #ff5c5c;
+  --border: #2a2f3a;
+  --focus: #8fb3ff;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 10px;
+  --shadow: 0 6px 22px rgba(0,0,0,.35);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: radial-gradient(1200px 800px at 80% -10%, rgba(91,140,255,.12), transparent 60%),
+              radial-gradient(800px 600px at -10% 20%, rgba(64,196,99,.10), transparent 60%),
+              var(--bg);
+  color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.topbar {
+  position: sticky; top: 0; z-index: 3;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(15,17,21,.6);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.topbar h1 { margin: 0; font-size: 16px; letter-spacing: .5px; }
+.topbar .right { display: flex; gap: 8px; align-items: center; }
+
+.container {
+  max-width: 1100px;
+  margin: 18px auto;
+  padding: 0 16px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 16px;
+}
+
+.card {
+  grid-column: span 12;
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+.card h2 { margin: 0 0 10px 0; font-size: 15px; }
+
+@media (min-width: 860px) {
+  .card:nth-of-type(1), .card:nth-of-type(2) { grid-column: span 12; }
+  .card:nth-of-type(3) { grid-column: span 6; }
+  .card:nth-of-type(4) { grid-column: span 12; }
+  .card:nth-of-type(5) { grid-column: span 12; }
+}
+
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.spacer { flex: 1; }
+
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: #202636;
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .04s ease, border-color .2s ease, box-shadow .2s ease;
+  user-select: none;
+}
+.btn:hover { border-color: #3a4354; }
+.btn:active { transform: translateY(1px); }
+.btn.primary { background: linear-gradient(180deg, #3b66e6, #274fc7); border-color: #284ecb; }
+.btn.success { background: linear-gradient(180deg, #2fb35a, #249a4a); border-color: #249a4a; }
+.btn.danger  { background: linear-gradient(180deg, #e64545, #c73333); border-color: #c73333; }
+.btn.ghost   { background: transparent; border-color: #323948; }
+.btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(143,179,255,.35);
+}
+
+.inline { display: grid; gap: 6px; }
+.inline label { color: var(--muted); font-size: 12px; }
+
+.input-group {
+  display: flex; align-items: stretch; width: 180px;
+  background: #1a2030; border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+}
+.input-group input {
+  width: 100%;
+  background: transparent; color: var(--text);
+  border: 0; padding: 8px 10px; font: inherit;
+}
+.input-group .suffix {
+  padding: 8px 10px; color: var(--muted);
+  border-left: 1px solid var(--border); background: #141a27;
+}
+
+.status, .log {
+  background: #0d1017;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  color: var(--text);
+  max-height: 180px; overflow: auto;
+}
+
+.files { margin-top: 8px; color: var(--muted); }
+.mono { font-family: var(--mono); }
+.small { font-size: 12px; }
+.muted { color: var(--muted); }
+
+.table-wrap {
+  width: 100%; overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px; background: #0d1017;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th {
+  position: sticky; top: 0; z-index: 1;
+  background: #121726; color: var(--muted);
+  text-align: left; padding: 10px; border-bottom: 1px solid var(--border);
+}
+tbody td { padding: 10px; border-bottom: 1px solid #1b2030; }
+tbody tr:hover { background: rgba(91,140,255,.06); }
+.footer {
+  padding: 18px 16px; text-align: center; color: var(--muted);
+  border-top: 1px solid var(--border);
+}

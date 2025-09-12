@@ -219,9 +219,24 @@ def run_updatecontract():
             return df, path
         else:
             logger.warning("No data was collected to save.")
+            return None, None
     else:
         time.sleep(60)
         counter += 1
+        
+        
+def run_update_loop(stop_event, status_holder):
+    # status_holder is a dict shared in-process to publish last result
+    while not stop_event.is_set():
+        frame_min = max(1, int(load_timeframe()))  # minutes
+        df,path = run_updatecontract()
+        status_holder["last_df"] = df.to_dict(orient="records")
+        status_holder["last_path"] = path
+        status_holder["last_time"] = ny_now().isoformat()
+        # wait until next cycle or stop
+        print(df.head(),path)
+        if stop_event.wait(frame_min * 60):
+            break
 def ny_now():
     return datetime.now(timezone.utc).astimezone(ZoneInfo("America/New_York"))
 
@@ -230,4 +245,4 @@ def csv_updater_path_for_today():
     return f"{TICKER_DIR}/Updater/OptionContracts_{edt_time.strftime('%Y%m%d')}_{edt_time.strftime('%H%M')}.csv"
 
 if __name__ == "__main__":
-    run_updatecontract()
+    run_update_loop()

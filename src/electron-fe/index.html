@@ -1,25 +1,66 @@
 <!doctype html>
-<html>
-  <head><meta charset="utf-8"><title>Electron Base</title></head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Electron</title>
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
   <body>
-    <h1>Electron</h1>
+    <header class="topbar">
+      <h1>Electron</h1>
+    </header>
 
-    <button id="btn">Ping</button>
-    <pre id="out"></pre>
+    <main class="container">
+      <section class="card">
+        <h2>Actions</h2>
+        <div class="actions">
+          <button id="run" class="btn">Run OptionChain</button>
+          <button id="preview" class="btn">Live Preview</button>
+          <button id="export" class="btn">Run OptionContract</button>
+        </div>
+      </section>
 
-    <hr>
+      <section class="card">
+        <h2>Updater</h2>
+        <div class="row">
+          <div class="inline">
+            <label for="intervalSec">Interval</label>
+            <div class="input-group">
+              <input id="intervalSec" type="number" min="5" value="60" />
+              <span class="suffix">sec</span>
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="inline">
+            <button id="updater" class="btn success">Start Updater</button>
+            <button id="stop" class="btn danger">Stop Updater</button>
+          </div>
+        </div>
+        <pre id="status" class="status">Idle</pre>
+      </section>
 
-    <button id="run">Run OptionChain</button>
-    <button id="preview">Live Preview</button>
-    <button id="updater">Optioncontract</button>
-    <button id="open">Open Folder in Explorer</button>
-    <div id="dir"></div>
-    <div id="files"></div>
-    <pre id="status"></pre>
-    <div id="table-wrap"></div>
-    
+      <section class="card">
+        <h2>Explorer</h2>
+        <div class="row">
+          <button id="open" class="btn ghost">Open Folder in Explorer</button>
+          <div id="dir" class="mono small"></div>
+        </div>
+        <div id="files" class="files"></div>
+      </section>
 
+      <section class="card">
+        <h2>Results</h2>
+        <div id="table-wrap" class="table-wrap">
+          
+        </div>
+      </section>
+      
+    </main>
 
-    <script src="renderer.js"></script>
+    <footer class="footer">
+      <span class="muted">Electron</span>
+    </footer>
+
+    <script src="./renderer.js"></script>
   </body>
 </html>

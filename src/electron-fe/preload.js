@@ -22,8 +22,8 @@ contextBridge.exposeInMainWorld('api', {
   runUpdater: () =>
       jsonFetch('/optionupdater/run', {method: 'POST'}),
   
-  previewCSV: () =>
-    jsonFetch(`/optionchain/preview.csv`),
+  previewCSV: (page = 1, pageSize = 200) =>
+    jsonFetch(`/optionchain/preview.csv?page=${page}&page_size=${pageSize}`),
   
   Export: () =>
       jsonFetch(`/optioncontract/run`, {method: 'POST'})

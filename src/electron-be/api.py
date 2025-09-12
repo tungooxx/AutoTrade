@@ -75,10 +75,29 @@ def _require_csv_path():
     return path
 
 @app.get("/optionchain/preview.csv")
-def preview_csv(limit: int = 200):
+def preview_csv(page: int = 1, page_size: int = 200):
     path = _require_csv_path()
-    df = pd.read_csv(path, nrows=limit)
-    return df.to_dict(orient="records")
+
+    with open(path, "r", encoding="utf-8", errors="ignore") as f:
+        total = sum(1 for _ in f) - 1
+    total = max(total, 0)
+
+    page = max(1, int(page))
+    page_size = max(1, int(page_size))
+    offset = (page - 1) * page_size
+
+    df = pd.read_csv(
+        path,
+        skiprows=range(1, 1 + offset) if offset > 0 else None,
+        nrows=page_size,
+    )
+
+    return {
+        "page": page,
+        "page_size": page_size,
+        "total": int(total),
+        "rows": df.to_dict(orient="records"),
+    }
 
 if __name__ == "__main__":
     uvicorn.run("api:app", host="127.0.0.1", port=6789, reload=True)

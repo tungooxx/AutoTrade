@@ -3,6 +3,7 @@ const tableWrap = document.getElementById('table-wrap');
 
 
 document.getElementById('run').onclick = async () => {
+  running = false;
   try {
     tableWrap.innerHTML = `<table></table>`;
     statusEl.textContent = 'Running...';
@@ -70,12 +71,14 @@ document.getElementById('stop').onclick = () => {
 };
 
 document.getElementById('export').onclick = async () => {
+  running = false;
   statusEl.textContent = 'Farming contract…';
   const data = await window.api.Export();
   statusEl.textContent = "Done, all csv saved in Option Ticker folder";
 };
 
 document.getElementById('preview').onclick = async () => {
+  running = false;
   try {
     tableWrap.innerHTML = `<table></table>`;
     statusEl.textContent = 'Loading preview…';
